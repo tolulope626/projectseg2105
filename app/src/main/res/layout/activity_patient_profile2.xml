@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/timeSpinner"
         android:layout_width="240dp"
         android:layout_height="25dp"
         app:layout_constraintBottom_toTopOf="@+id/waitTime"

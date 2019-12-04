@@ -131,11 +131,11 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/bookBtn"
+            android:id="@+id/viewBBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="BOOK" />
+            android:text="View bookings" />
 
         <Button
             android:id="@+id/logoutBtn"

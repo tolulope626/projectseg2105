@@ -23,9 +23,9 @@
 
     <ListView
         android:id="@+id/serviceList3"
-        android:layout_width="409dp"
-        android:layout_height="688dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="40dp"
         android:background="@color/common_google_signin_btn_text_light_focused"
         app:layout_constraintBottom_toBottomOf="parent"
