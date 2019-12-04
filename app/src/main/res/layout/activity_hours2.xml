@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bacjjaj"
+    tools:context=".Hours2">
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="0dp"
+        android:layout_height="520dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:gravity="center|left"
+                android:text="Monday*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="Tuesday*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Wednesday*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="Thursday*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="Friday*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:text="Saturday*"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="Sunday*"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/monFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+
+                <EditText
+                    android:id="@+id/monTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/tueFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+
+                <EditText
+                    android:id="@+id/tueTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/wedFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent"
+                    android:visibility="visible" />
+
+                <EditText
+                    android:id="@+id/wedTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/thurFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+
+                <EditText
+                    android:id="@+id/thurTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/friFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+
+                <EditText
+                    android:id="@+id/friTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/satFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+
+                <EditText
+                    android:id="@+id/satTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/sunFTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="From"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+
+                <EditText
+                    android:id="@+id/sunTTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="To"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textColorHint="@color/colorAccent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Hours"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
