@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -260,6 +261,16 @@ public class patientProfile extends AppCompatActivity {
         });
 
 
+    }
+
+    public void OnOpenInGoogleMaps (View view) {
+        EditText teamAddres = (EditText) findViewById(R.id.addressText);
+    // Create a Uri from an intent string. Use the result to create an Intent.
+        Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q="+teamAddres.getText()); // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri); // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps");
+    // Attempt to start an activity that can handle the Intent
+        startActivity(mapIntent);
     }
 
     /*@Override
