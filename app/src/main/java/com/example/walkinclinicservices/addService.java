@@ -81,13 +81,14 @@ public class addService extends AppCompatActivity {
                 final Service service = serviceList.get(position);
 
                 //String idneeded = ids.get(position);
-                final String idneeded = ids.get(position);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(addService.this);
-                builder.setMessage("Are you sure you want to delete this Account?")
+                builder.setMessage("Are you sure you want to add this service?")
                         .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 updateService(empID,service);
+                                Toast.makeText(addService.this, "Service has been added", Toast.LENGTH_SHORT).show();
 
                             }
                         })
@@ -95,7 +96,7 @@ public class addService extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
 
-                Toast.makeText(addService.this, "Service has been added", Toast.LENGTH_SHORT).show();
+
 
                 return false;
             }

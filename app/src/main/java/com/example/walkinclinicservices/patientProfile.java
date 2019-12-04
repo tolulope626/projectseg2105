@@ -1,18 +1,18 @@
 package com.example.walkinclinicservices;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,15 +33,18 @@ public class patientProfile extends AppCompatActivity {
 
     String clinic;
     ArrayAdapter<String> sadapter;
+    public int counter;
 
 
     private EditText addressText;
-    private Button logoutBtn,searchBtn, bookBtn;
+    private Button logoutBtn,searchBtn,viewBBtn;
     private Spinner toSpinner,fromSpinner,serviceSpinner,daySpinner;
     private ListView clinicList;
 
     public ArrayList<String> avClinicList;
+    public ArrayList<String> avService;
     public ArrayList<String> ids;
+    public ArrayList<String> ids2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +58,12 @@ public class patientProfile extends AppCompatActivity {
 
         clinic = "";
 
+        counter = 0;
+
 
         logoutBtn = (Button) findViewById(R.id.logoutBtn);
-        bookBtn = (Button) findViewById(R.id.bookBtn);
         searchBtn = (Button) findViewById(R.id.searchBtn);
+        viewBBtn = (Button) findViewById(R.id.viewBBtn);
         toSpinner = (Spinner) findViewById(R.id.toSpinner);
         fromSpinner = (Spinner) findViewById(R.id.fromSpinner);
         serviceSpinner = (Spinner) findViewById(R.id.serviceSpinner);
@@ -66,25 +71,25 @@ public class patientProfile extends AppCompatActivity {
         clinicList = (ListView) findViewById(R.id.clinicList);
 
         //set the time spinners
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Time,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Time, R.layout.support_simple_spinner_dropdown_item);
         toSpinner.setAdapter(adapter);
         fromSpinner.setAdapter(adapter);
 
         //set the service spinner
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.Services,R.layout.support_simple_spinner_dropdown_item);
-        serviceSpinner.setAdapter(adapter2);
+        //ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.Services,R.layout.support_simple_spinner_dropdown_item);
+        //serviceSpinner.setAdapter(adapter2);
 
         //set the day spinner
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.Days,R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.Days, R.layout.support_simple_spinner_dropdown_item);
         daySpinner.setAdapter(adapter3);
 
         //initialize lists
         avClinicList = new ArrayList<>();
-        //avClinicList.add("A");
-        //avClinicList.add("B");
-        //avClinicList.add("B");
-        //avClinicList.add("B");
+        avService = new ArrayList<>();
+
+
         ids = new ArrayList<>();
+        ids2 = new ArrayList<>();
 
         //set the listView
         sadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,avClinicList);
@@ -133,10 +138,38 @@ public class patientProfile extends AppCompatActivity {
             }
         });
 
+        clinicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String who = ids.get(position);
+                String i = clinicList.getItemAtPosition(position).toString();
+                final String from = fromSpinner.getSelectedItem().toString();
+                final String to = toSpinner.getSelectedItem().toString();
+
+                String updatedf = "";
+                String updatedt = "";
+
+                if (from.length() == 5){
+                    updatedf = Character.toString(from.charAt(0)) + Character.toString(from.charAt(1));
+                }else { updatedf = Character.toString(from.charAt(0)); }
+
+                if (to.length() == 5){
+                    updatedt = Character.toString(to.charAt(0)) + Character.toString(to.charAt(1));
+                }else { updatedt = Character.toString(to.charAt(0)); }
+
+                Intent newint = new Intent(patientProfile.this, patientProfile2.class);
+                newint.putExtra("id", who);
+                newint.putExtra("name", i);
+                newint.putExtra("From", updatedf);
+                newint.putExtra("To", updatedt);
+                startActivity(newint);
+            }
+        });
+
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Toast.makeText(patientProfile.this,"Hello",Toast.LENGTH_SHORT);
+
                 avClinicList.clear();
                 ids.clear();
 
@@ -147,29 +180,24 @@ public class patientProfile extends AppCompatActivity {
                 String word = "";
                 String word2 = "";
 
+
                 mDatabase.child("Hours").addValueEventListener(new ValueEventListener() {
-                    //@Override
-                    String word = "";
-                    String word2 = "";
+                    @Override
+                    //String word = "";
+                    //String word2 = "";
 
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
 
 
                             String hour = serviceSnapshot.child(day.toLowerCase()).getValue(String.class);
+                            String hour2 = serviceSnapshot.child(day.toLowerCase() + '2').getValue(String.class);
 
-                            for(int i = 0; i<hour.length();i++){
-                                if(hour.charAt(i) == ' '){
-                                    word2 = word;
-                                    word = "";
-                                    continue;
-                                }
 
-                                word += hour.charAt(i);
-                            }
+                            int fromnum = Integer.parseInt(hour);
+                            int tonum = Integer.parseInt(hour2);
 
-                            int fromnum = Integer.parseInt(word2);
-                            int tonum = Integer.parseInt(word);
+
 
                             String updatedf = "";
                             String updatedt = "";
@@ -183,17 +211,18 @@ public class patientProfile extends AppCompatActivity {
                             }else { updatedt = Character.toString(to.charAt(0)); }
 
 
-                            if(fromnum <= Integer.parseInt(updatedf) || tonum > Integer.parseInt(updatedf)){
-                                ids.add(serviceSnapshot.getKey());
-                                updateList(serviceSnapshot.getKey());
-                                //avClinicList.add(clinic);
-                                Toast.makeText(patientProfile.this,"Trying",Toast.LENGTH_LONG).show();
+                            if(fromnum <= Integer.parseInt(updatedf) || tonum > Integer.parseInt(updatedt)){
+                                //ids.add(serviceSnapshot.getKey());
+                                checkService(service, serviceSnapshot.getKey());
+
+
                             }
 
                         }
 
-                        sadapter = new ArrayAdapter<String>(patientProfile.this, android.R.layout.simple_list_item_1,avClinicList);
-                        clinicList.setAdapter(sadapter);
+                        //sadapter = new ArrayAdapter<String>(patientProfile.this, android.R.layout.simple_list_item_1,avClinicList);
+                        //clinicList.setAdapter(sadapter);
+
                     }
 
                     @Override
@@ -201,35 +230,65 @@ public class patientProfile extends AppCompatActivity {
 
                     }
                 });
-
-
-
-
-
             }
         });
 
-        bookBtn.setOnClickListener(new View.OnClickListener(){
+
+        viewBBtn.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(patientProfile.this, patientProfile2.class));
+                startActivity(new Intent(patientProfile.this, Bookings.class));
 
             }
         });
 
 
+
     }
 
-    public void updateList(String id){
-        mDatabase.child("Employee").child(id).addValueEventListener(new ValueEventListener() {
+    public void checkService(final String service, final String id){
+
+            mDatabase.child("ClinicService").child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    for (DataSnapshot serviceSnapshot : dataSnapshot.getChildren()) {
+                        Service serv = serviceSnapshot.getValue(Service.class);
+                        String idk = serv.getServiceName();
+
+                        if(idk.equals(service)){
+                            updateList(id);
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+    }
+
+    public void updateList(final String id){
+        mDatabase.child("Employee").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot empSnapshot : dataSnapshot.getChildren()){
+                    if(empSnapshot.getKey().equals(id)){
 
-                employee emp = dataSnapshot.getValue(employee.class);
-                clinic = emp.getClinic();
-                avClinicList.add(clinic);
+                        employee emp = empSnapshot.getValue(employee.class);
+                        clinic = emp.getClinic();
+                        avClinicList.add(clinic);
+                        ids.add(empSnapshot.getKey());
+                    }
+                }
+
+                sadapter = new ArrayAdapter<String>(patientProfile.this, android.R.layout.simple_list_item_1,avClinicList);
+                clinicList.setAdapter(sadapter);
             }
 
             @Override
@@ -240,41 +299,15 @@ public class patientProfile extends AppCompatActivity {
 
 
     }
-
     public void OnOpenInGoogleMaps (View view) {
         EditText teamAddres = (EditText) findViewById(R.id.addressText);
-    // Create a Uri from an intent string. Use the result to create an Intent.
+// Create a Uri from an intent string. Use the result to create an Intent.
         Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q="+teamAddres.getText()); // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri); // Make the Intent explicit by setting the Google Maps package
         mapIntent.setPackage("com.google.android.apps.maps");
-    // Attempt to start an activity that can handle the Intent
+// Attempt to start an activity that can handle the Intent
         startActivity(mapIntent);
     }
 
-    /*@Override
-    protected void onStart() {
-        super.onStart();
 
-        mDatabase.child("Hours").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                serviceList.clear();
-
-                for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
-                    Service service = serviceSnapshot.getValue(Service.class);
-                    serviceList.add(service);
-                    ids.add(serviceSnapshot.getKey());
-                }
-
-                ServiceListAdapter adapter = new ServiceListAdapter(adminProfile.this,R.layout.adapter_view_layout,serviceList);
-                mListView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }*/
 }

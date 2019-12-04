@@ -102,6 +102,8 @@ public class ClinicServices extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 startActivity(new Intent(ClinicServices.this,addService.class));
 
             }
@@ -118,8 +120,17 @@ public class ClinicServices extends AppCompatActivity {
             mDatabase.child("Employee").child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    employee curemployee = dataSnapshot.getValue(employee.class);
+                    employee currentEmployee = dataSnapshot.getValue(employee.class);
                     empID = dataSnapshot.getKey();
+
+                    for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
+                        Service service = serviceSnapshot.getValue(Service.class);
+                        serviceList.add(service);
+                        ids.add(serviceSnapshot.getKey());
+                    }
+
+                    ServiceListAdapter adapter = new ServiceListAdapter(ClinicServices.this,R.layout.adapter_view_layout,serviceList);
+                    mListView.setAdapter(adapter);
                 }
 
                 @Override
