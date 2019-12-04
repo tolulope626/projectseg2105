@@ -204,29 +204,7 @@ public class patientProfile extends AppCompatActivity {
 
 
 
-                /*for(int i = 0; i<ids.size();i++){
-                  mDatabase.child("Employee").child(ids.get(i).trim()).addListenerForSingleValueEvent(new ValueEventListener() {
-                      @Override
-                      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                          employee curemploy = dataSnapshot.getValue(employee.class);
-                          clinic = curemploy.getClinic();
-                          avClinicList.add(clinic);
-                          Toast.makeText(patientProfile.this,clinic,Toast.LENGTH_LONG).show();
 
-                      }
-
-                      @Override
-                      public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                      }
-                  });
-                }*/
-
-                //sadapter = new ArrayAdapter<String>(patientProfile.this, android.R.layout.simple_list_item_1,avClinicList);
-                //clinicList.setAdapter(sadapter);
-
-                //sadapter.notifyDataSetChanged();
-                //startActivity(new Intent(patientProfile.this, patientProfile.class));
 
             }
         });
