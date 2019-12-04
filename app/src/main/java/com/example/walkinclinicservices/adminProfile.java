@@ -240,8 +240,8 @@ public class adminProfile extends AppCompatActivity {
 
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("You are about to leave");
-        builder.setMessage("Are you sure you want to leave?");
+        builder.setTitle("You are about to leave without signing out! if you leave you will be signed out");
+        builder.setMessage("do you still want to leave?");
 
         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
