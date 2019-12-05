@@ -29,6 +29,7 @@
         <activity android:name=".registration" />
         <activity android:name=".employee" />
         <activity android:name=".patient" />
+        <activity android:name = ".Bookings" />
         <activity android:name=".admin" />
         <activity android:name=".MainActivity">
             <intent-filter>

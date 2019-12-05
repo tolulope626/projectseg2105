@@ -123,15 +123,9 @@ public class ClinicServices extends AppCompatActivity {
                     employee currentEmployee = dataSnapshot.getValue(employee.class);
                     empID = dataSnapshot.getKey();
 
-                    for(DataSnapshot serviceSnapshot : dataSnapshot.getChildren()){
-                        Service service = serviceSnapshot.getValue(Service.class);
-                        serviceList.add(service);
-                        ids.add(serviceSnapshot.getKey());
-                    }
-
-                    ServiceListAdapter adapter = new ServiceListAdapter(ClinicServices.this,R.layout.adapter_view_layout,serviceList);
-                    mListView.setAdapter(adapter);
                 }
+
+
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -140,7 +134,7 @@ public class ClinicServices extends AppCompatActivity {
             });
         }
 
-        mDatabase.child("ClinicService").child(empID).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("ClinicService").child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
